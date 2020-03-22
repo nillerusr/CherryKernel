@@ -28,6 +28,6 @@ jobs:
         cp CherryKernel-9.2-cactus.zip ../
 
     - uses: actions/upload-artifact@v1
-    with:
-      name: CherryKernel-9.2-cactus
-      path: CherryKernel-9.2-cactus.zip
+      with:
+        name: CherryKernel-9.2-cactus
+        path: CherryKernel-9.2-cactus.zip
