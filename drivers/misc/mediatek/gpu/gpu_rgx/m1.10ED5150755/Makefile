@@ -1,4 +1,4 @@
-OPTIM = -Os
+OPTIM = -O3
 
 MTK_GPU_VERSION = $(subst ",,$(CONFIG_MTK_GPU_VERSION))
 
