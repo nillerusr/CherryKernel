@@ -24,9 +24,9 @@ jobs:
         git clone https://github.com/DevelopmentJunkyard/AnyKernel3 -b cereus ak3
         cp out/arch/arm/boot/zImage-dtb ak3
         cd ak3
-        zip -r9 CherryKernel-9.2-cereus.zip *
-        cp CherryKernel-9.2-cereus.zip ../
+        zip -r9 CherryKernel-Ionized-cereus.zip *
+        cp CherryKernel-Ionized-cereus.zip ../
     - uses: actions/upload-artifact@v1
       with:
-        name: CherryKernel-9.2-cereus
-        path: CherryKernel-9.2-cereus.zip
+        name: CherryKernel-Ionized-cereus
+        path: CherryKernel-Ionized-cereus.zip
