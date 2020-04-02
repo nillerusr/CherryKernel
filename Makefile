@@ -2,7 +2,7 @@ VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 119
 EXTRAVERSION =
-export LOCALVERSION="-CherryKernel-9.2"
+export LOCALVERSION="-CherryKernel-Ionized"
 NAME = Roaring Lionus
 
 # *DOCUMENTATION*
@@ -707,7 +707,8 @@ DISABLE_LTO	+= $(DISABLE_CFI)
 export DISABLE_CFI
 endif
 
-KBUILD_CFLAGS += -w -O3
+# Cherry Kernel
+KBUILD_CFLAGS += -w -O3 -mfpu=neon-vfpv4 -mtune=cortex-a53 -march=armv7-a+neon-vfpv4
 
 KBUILD_CFLAGS += $(call cc-ifversion, -lt, 0409, \
 			$(call cc-disable-warning,maybe-uninitialized,))
