@@ -708,7 +708,10 @@ export DISABLE_CFI
 endif
 
 # Cherry Kernel
-KBUILD_CFLAGS += -w -O3 -mfpu=neon-vfpv4 -mtune=cortex-a53 -march=armv7-a+neon-vfpv4
+KBUILD_CFLAGS += -w
+KBUILD_CFLAGS += -O3
+KBUILD_CFLAGS += -mfpu=neon-vfpv4
+KBUILD_CFLAGS += -mtune=cortex-a53
 
 KBUILD_CFLAGS += $(call cc-ifversion, -lt, 0409, \
 			$(call cc-disable-warning,maybe-uninitialized,))
