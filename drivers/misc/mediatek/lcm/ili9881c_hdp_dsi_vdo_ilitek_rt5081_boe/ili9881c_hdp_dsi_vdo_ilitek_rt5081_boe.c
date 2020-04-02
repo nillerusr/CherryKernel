@@ -304,7 +304,7 @@ static void lcm_get_params(struct LCM_PARAMS *params)
 	params->corner_pattern_height = 32;
 #endif
 
-	params->vbias_level = 6500000;
+	params->vbias_level = 6000000;
 
 }
 
