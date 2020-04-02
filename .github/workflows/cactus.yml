@@ -24,10 +24,10 @@ jobs:
         git clone https://github.com/DevelopmentJunkyard/AnyKernel3 -b cactus ak3
         cp out/arch/arm/boot/zImage-dtb ak3
         cd ak3
-        zip -r9 CherryKernel-9.2-cactus.zip *
-        cp CherryKernel-9.2-cactus.zip ../
+        zip -r9 CherryKernel-Ionized-cactus.zip *
+        cp CherryKernel-Ionized-cactus.zip ../
 
     - uses: actions/upload-artifact@v1
       with:
-        name: CherryKernel-9.2-cactus
-        path: CherryKernel-9.2-cactus.zip
+        name: CherryKernel-Ionized-cactus
+        path: CherryKernel-Ionized-cactus.zip
