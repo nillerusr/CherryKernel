@@ -711,7 +711,7 @@ endif
 KBUILD_CFLAGS += -w
 KBUILD_CFLAGS += -O3
 KBUILD_CFLAGS += -mfpu=neon-vfpv4
-KBUILD_CFLAGS += -march=armv7-a+neon-vfpv4
+KBUILD_CFLAGS += -march=armv7-a
 
 KBUILD_CFLAGS += $(call cc-ifversion, -lt, 0409, \
 			$(call cc-disable-warning,maybe-uninitialized,))
