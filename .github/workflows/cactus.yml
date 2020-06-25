@@ -15,14 +15,17 @@ jobs:
 
     - name: Build
       run: |
-        sudo apt install -y wget bc build-essential make autoconf automake
+        sudo apt install -y wget bc build-essential make autoconf automake curl
         sh build.sh
         git clone --depth 1 https://github.com/nillerusr/AnyKernel3 -b cactus ak3
         cp out/arch/arm/boot/zImage-dtb ak3
         cd ak3
-        zip -r9 CherryKernel-Ionized-cactus.zip *
-        cp CherryKernel-Ionized-cactus.zip ../
-    - uses: actions/upload-artifact@v1
+        zip -r9 CherryKernel-cactus.zip *
+        cp CherryKernel-cactus.zip ../
+        curl --upload-file CherryKernel-cactus.zip https://transfer.sh/CherryKernel-cactus.zip >> links.txt
+    - uses: actions/upload-artifact@v2
       with:
-        name: CherryKernel-Ionized-cactus
-        path: CherryKernel-Ionized-cactus.zip
+        path: CherryKernel-cactus.zip
+    - uses: actions/upload-artifact@v2
+      with:
+        path: links.txt
