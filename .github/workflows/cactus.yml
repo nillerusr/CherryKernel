@@ -22,10 +22,12 @@ jobs:
         cd ak3
         zip -r9 CherryKernel-cactus.zip *
         cp CherryKernel-cactus.zip ../
-        curl --upload-file CherryKernel-cactus.zip https://transfer.sh/CherryKernel-cactus.zip >> links.txt
+        curl --upload-file CherryKernel-cactus.zip https://transfer.sh/CherryKernel-cactus.zip > ../links.txt
     - uses: actions/upload-artifact@v2
       with:
+        name: CherryKernel-cactus.zip
         path: CherryKernel-cactus.zip
     - uses: actions/upload-artifact@v2
       with:
+        name: links.txt
         path: links.txt
