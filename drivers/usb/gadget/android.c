@@ -942,59 +942,6 @@ static int mtp_function_ctrlrequest(struct android_usb_function *f,
 	return mtp_ctrlrequest(cdev, c);
 }
 
-static int cpumask_to_int(const struct cpumask *cpu_mask)
-{
-	int mask = 0;
-	int cpu;
-
-	for_each_cpu(cpu, cpu_mask) {
-		pr_debug("[USB]%d\n", cpu);
-		mask |= (1 << cpu);
-	}
-
-	return mask;
-}
-
-static ssize_t cpu_mask_show(struct device *dev,
-		struct device_attribute *attr, char *buf)
-{
-	struct cpumask *cpu_mask = mtp_get_cpu_mask();
-
-	return sprintf(buf, "0x%X\n", (cpu_mask?cpumask_to_int(cpu_mask):0xFFFFFFFF));
-}
-
-static ssize_t cpu_mask_store(struct device *dev,
-		struct device_attribute *attr, const char *buf, size_t size)
-{
-	unsigned int mask;
-
-	if (kstrtouint(buf, 16, &mask) != 0)
-		return -EINVAL;
-
-	pr_info("Store => 0x%x\n", mask);
-
-	mtp_set_cpu_mask(mask);
-
-	return size;
-}
-
-static DEVICE_ATTR(cpu_mask, S_IRUGO | S_IWUSR, cpu_mask_show,
-					       cpu_mask_store);
-
-static ssize_t mtp_server_show(struct device *dev,
-		struct device_attribute *attr, char *buf)
-{
-	return sprintf(buf, "%d\n", mtp_get_mtp_server());
-}
-
-static DEVICE_ATTR(mtp_server, S_IRUGO, mtp_server_show,
-					       NULL);
-
-static struct device_attribute *mtp_function_attributes[] = {
-	&dev_attr_cpu_mask,
-	&dev_attr_mtp_server,
-	NULL
-};
 
 static struct android_usb_function mtp_function = {
 	.name		= "mtp",
@@ -1817,18 +1764,6 @@ static int midi_function_bind_config(struct android_usb_function *f,
 			MIDI_INPUT_PORTS, MIDI_OUTPUT_PORTS, MIDI_BUFFER_SIZE,
 			MIDI_QUEUE_LENGTH, config);
 }
-
-static ssize_t midi_alsa_show(struct device *dev,
-		struct device_attribute *attr, char *buf)
-{
-	struct android_usb_function *f = dev_get_drvdata(dev);
-	struct midi_alsa_config *config = f->config;
-
-	/* print ALSA card and device numbers */
-	return sprintf(buf, "%d %d\n", config->card, config->device);
-}
-
-static DEVICE_ATTR(alsa, S_IRUGO, midi_alsa_show, NULL);
 
 static struct device_attribute *midi_function_attributes[] = {
 	&dev_attr_alsa,
