@@ -1,9 +1,10 @@
-name: Build Cherry Kernel for cactus
+name: Build cherry kernel for cactus
 
 on:
   push:
-    paths:
-    - 'cactus.trigger'
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
@@ -16,12 +17,11 @@ jobs:
       run: |
         sudo apt install -y wget bc build-essential make autoconf automake
         sh build.sh
-        git clone https://github.com/DevelopmentJunkyard/AnyKernel3 -b cactus ak3
+        git clone --depth 1 https://github.com/nillerusr/AnyKernel3 -b cactus ak3
         cp out/arch/arm/boot/zImage-dtb ak3
         cd ak3
         zip -r9 CherryKernel-Ionized-cactus.zip *
         cp CherryKernel-Ionized-cactus.zip ../
-
     - uses: actions/upload-artifact@v1
       with:
         name: CherryKernel-Ionized-cactus
