@@ -15,12 +15,7 @@ jobs:
     - name: Build
       run: |
         sudo apt install -y wget bc build-essential make autoconf automake
-        wget -q https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/arm-linux-gnueabihf/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz
-        tar -xJf gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz
-        mv gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf gcc
-        rm gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz
-        ARCH=arm make O=out cactus_defconfig
-        ARCH=arm CROSS_COMPILE=$(pwd)/gcc/bin/arm-linux-gnueabihf- make O=out -j$(nproc --all)
+        sh build.sh
         git clone https://github.com/DevelopmentJunkyard/AnyKernel3 -b cactus ak3
         cp out/arch/arm/boot/zImage-dtb ak3
         cd ak3
